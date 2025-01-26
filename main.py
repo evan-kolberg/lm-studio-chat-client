@@ -3,6 +3,7 @@ import requests
 import json
 
 try:
+    # ./loophole.exe http 1234 --hostname llm
     address = "https://llm.loophole.site/"
     requests.get(address, timeout=5)
 except requests.exceptions.Timeout:
@@ -10,6 +11,8 @@ except requests.exceptions.Timeout:
     exit()
 
 try:
+    # if no model is currently loaded, the most recent will be used
+    # if there are no models downloaded, i guess it just won't work
     model = json.loads(requests.get(address+"v1/models").text)["data"][0]["id"]
 except:
     print(f"\033[32mREVERSE PROXY SERVER ONLINE\033[37m | \033[31mLLM SERVER OFFLINE\033[37m")
